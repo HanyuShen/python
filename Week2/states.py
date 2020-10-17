@@ -8,3 +8,7 @@ greenLight = 0
 
 printState()
 print (type(redLight))
+
+print(3+5)
+print("3"+"5")
+print(int("3")+5)
