@@ -1,18 +1,17 @@
-x=10
-y = 20.0
-z = 1j
+day = "Beautiful"
+print(day[1])
 
-print(type(x))
-print(type(y))
-print(type(z))
+day = "Beautiful"
+print(day[0:5])
 
-x =int(1)
-y =int(2.8)
-z =int("3")
+day = "Beautiful"
+print(day[-3])
+print(day[-3:])
+print(day[-5:3])
+print(day[-5:-3])
 
-print(x)
-print(y)
-print(z)
-print(type(x))
-print(type(y))
-print(type(z))
+day == "Beautiful"
+print ("Today is "+day)
+
+day="Beautiful"
+print(str(day == "Beautiful")+":Todat is "+day)
