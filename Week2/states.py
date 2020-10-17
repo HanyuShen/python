@@ -7,3 +7,4 @@ yellowLight = "off"
 greenLight = "off"
 
 printState()
+print (type(redLight))
