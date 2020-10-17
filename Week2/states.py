@@ -1,10 +1,18 @@
-def printState():
-    print ("Red Light on? " + str(redLight))
-    print ("Yellow Light on? " + str(yellowLight))
-    print ("Green Light on? " + str(greenLight))
-redLight = True
-yellowLight = False
-greenLight = False
-printState()
+x=10
+y = 20.0
+z = 1j
 
-print (type(redLight))
+print(type(x))
+print(type(y))
+print(type(z))
+
+x =int(1)
+y =int(2.8)
+z =int("3")
+
+print(x)
+print(y)
+print(z)
+print(type(x))
+print(type(y))
+print(type(z))
