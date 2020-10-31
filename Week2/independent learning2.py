@@ -25,8 +25,5 @@ F=str(fn[0])
 S=str(sn[0])
 print(F+S)
 
-age = input("Please enter your age:")
-if int(age)>18:
-    print(True)
-else:
-    print(False)
+age = input("Please enter your age: ")
+print(str(age > 17))
