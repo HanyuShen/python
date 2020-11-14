@@ -41,6 +41,15 @@ grid = GenerateGrid()
 DisplayGrid()
 
 
+def PlaceWord(word,row,col,direction):
+    for charOfWord in range(len(word)):
+        grid[row][col] = word[charOfWord]
+        if direction == 0: col+=1
+        if direction == 1: col-=1
+        if direction == 2: row+=1
+        if direction == 3: row-=1
+
+
 def PlaceWords():
     for word in words:
         if len(word) > rowMax or len(word) > colMax : continue
@@ -54,7 +63,7 @@ def PlaceWords():
             min = len(word) - 1
             max = colMax - 1
         elif direction == 2:
-            print("placing",word,"from toop to bottom")
+            print("placing",word,"from top to bottom")
             min = 0
             max = rowMax - len(word)
         elif direction == 3:
@@ -73,9 +82,13 @@ def PlaceWords():
             col = random.randint(0,colMax-1)
             row = square
             print(" in column ", col)
+        PlaceWord(word,row,col,direction)
 
 PlaceWords()
 
+
+
+DisplayGrid()
 
 
 
