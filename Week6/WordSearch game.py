@@ -65,38 +65,43 @@ def CheckWordWillFit(word,row,col,direction):
 def PlaceWords():
     for word in words:
         if len(word) > rowMax or len(word) > colMax : continue
-        direction = random.randint(0,3)
-        if direction == 0:
-            print("placing",word,"from left to right")
-            min = 0
-            max = colMax - len(word)
-        elif direction == 1:
-            print("placing",word,"from right to left")
-            min = len(word) - 1
-            max = colMax - 1
-        elif direction == 2:
-            print("placing",word,"from top to bottom")
-            min = 0
-            max = rowMax - len(word)
-        elif direction == 3:
-            print("placing",word,"from bottom to top")
-            min = len(word) - 1
-            max = rowMax - 1
-        print("Word length is ",len(word),"so: ")
-        print("min: ",min,"max: ",max)
-        square = random.randint(min,max)
-        print("Square chosen is ",square)
-        if direction < 2:
-            row = random.randint(0,rowMax-1)
-            col = square
-            print(" in row ",row)
-        else:
-            col = random.randint(0,colMax-1)
-            row = square
-            print(" in column ", col)
-        foundValidLocation = CheckWordWillFit(word,row,col,direction)
-        if foundValidLocation:
-            PlaceWord(word,row,col,direction)
+        count = 0
+        foundValidLocation = False
+        while not foundValidLocation and count < 10:
+            count += 1
+            foundValidLocation = True
+            direction = random.randint(0,3)
+            if direction == 0:
+                print("placing",word,"from left to right")
+                min = 0
+                max = colMax - len(word)
+            elif direction == 1:
+                print("placing",word,"from right to left")
+                min = len(word) - 1
+                max = colMax - 1
+            elif direction == 2:
+                print("placing",word,"from top to bottom")
+                min = 0
+                max = rowMax - len(word)
+            elif direction == 3:
+                print("placing",word,"from bottom to top")
+                min = len(word) - 1
+                max = rowMax - 1
+            print("Word length is ",len(word),"so: ")
+            print("min: ",min,"max: ",max)
+            square = random.randint(min,max)
+            print("Square chosen is ",square)
+            if direction < 2:
+                row = random.randint(0,rowMax-1)
+                col = square
+                print(" in row ",row)
+            else:
+                col = random.randint(0,colMax-1)
+                row = square
+                print(" in column ", col)
+            foundValidLocation = CheckWordWillFit(word,row,col,direction)
+            if foundValidLocation:
+                PlaceWord(word,row,col,direction)
 
 
 
