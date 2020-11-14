@@ -103,12 +103,19 @@ def PlaceWords():
             if foundValidLocation:
                 PlaceWord(word,row,col,direction)
 
-
+def GridRandomFill():
+    alphabet = "aabcdeeefghijklmnoopqrstuvwxyz"
+    for row in range(rowMax):
+        for col in range(colMax):
+            if grid[row][col] == "-":
+                letterFromAlphabet = random.randint(0,len(alphabet)-1)
+                grid[row][col] = alphabet[letterFromAlphabet]
+    
 
 PlaceWords()
 
 
-
+GridRandomFill()
 DisplayGrid()
 
 
