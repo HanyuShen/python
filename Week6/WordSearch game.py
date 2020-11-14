@@ -1,10 +1,5 @@
 import random
 
-word1 = "happy"
-word2 = "sunny"
-word3 = "funny"
-word4 = "honey"
-
 def GenerateGrid():
     grid = [['-' for x in range(colMax)] for y in range(rowMax)]
     return grid
@@ -20,26 +15,19 @@ def GetWordsFromUser():
         if word != "": theWords.append(word)
         else:return theWords
      
-words = GetWords()
 
-def DisplayWords():
+words = GetWords()
+def DisplayWords(words = words):
     for word in words:
         print(word)
 
-DisplayWords()
+
 
 def DisplayGrid():
     for row in range(rowMax):
         for col in range(colMax):
             print(grid[row][col] + ' ',end="")
         print()
-
-
-rowMax = int(input("Enter number of rows: "))
-colMax = int(input("Enter number of columns: "))
-grid = GenerateGrid()
-DisplayGrid()
-
 
 def PlaceWord(word,row,col,direction):
     for charOfWord in range(len(word)):
@@ -48,6 +36,7 @@ def PlaceWord(word,row,col,direction):
         if direction == 1: col-=1
         if direction == 2: row+=1
         if direction == 3: row-=1
+    placedWords.append(word)
 
 def CheckWordWillFit(word,row,col,direction):
     for charOfWord in range(len(word)):
@@ -110,7 +99,23 @@ def GridRandomFill():
             if grid[row][col] == "-":
                 letterFromAlphabet = random.randint(0,len(alphabet)-1)
                 grid[row][col] = alphabet[letterFromAlphabet]
+
+placedWords = []
     
+word1 = "happy"
+word2 = "sunny"
+word3 = "funny"
+word4 = "honey"
+
+
+
+
+DisplayWords(placedWords)
+
+rowMax = int(input("Enter number of rows: "))
+colMax = int(input("Enter number of columns: "))
+grid = GenerateGrid()
+DisplayGrid()
 
 PlaceWords()
 
