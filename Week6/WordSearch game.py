@@ -49,6 +49,18 @@ def PlaceWord(word,row,col,direction):
         if direction == 2: row+=1
         if direction == 3: row-=1
 
+def CheckWordWillFit(word,row,col,direction):
+    for charOfWord in range(len(word)):
+        if grid[row][col] == '-' or grid[row][col] == word[charOfWord]:
+            if direction == 0: col+=1
+            if direction == 1: col-=1
+            if direction == 2: row+=1
+            if direction == 3: row-=1
+        else:
+            print("Word will not fit")
+            return False
+    return True
+
 
 def PlaceWords():
     for word in words:
@@ -82,7 +94,11 @@ def PlaceWords():
             col = random.randint(0,colMax-1)
             row = square
             print(" in column ", col)
-        PlaceWord(word,row,col,direction)
+        foundValidLocation = CheckWordWillFit(word,row,col,direction)
+        if foundValidLocation:
+            PlaceWord(word,row,col,direction)
+
+
 
 PlaceWords()
 
