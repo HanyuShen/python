@@ -16,14 +16,23 @@ def create_buttons():
 
     square[2].place(x=200,y=200)
 
+counter = 0
+
 def square_taken():
     messagebox.showinfo("Square Taken","Square already taken choose another!")
 
 def handle_button_click(button_number):
     print("Button ",button_number, "was clicked")
-    square[button_number].configure(image=player1_taken,command=square_taken)
-    
-    
+    global counter
+    if counter % 2 == 0:
+        square[button_number].configure(image=player1_taken,command=square_taken)
+    else:
+        square[button_number].configure(image=player2_taken,command=square_taken)
+
+counter += 1
+
+
+ 
 window = Tk()
 window.title("OXO Game")
 window.geometry("300x300")
