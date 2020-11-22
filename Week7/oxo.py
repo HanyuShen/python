@@ -1,20 +1,27 @@
-from tkinter import Tk,PhotoImage,Button
+from tkinter import Tk,PhotoImage,Button,messagebox
 
 def create_buttons():
     square[0] = Button(window,image=available_space,width="100",
-                       height="100",command=None)
+                       height="100",command=lambda: handle_button_click(0))
 
     square[0].place(x=0,y=0)
-def create_buttons2():
-    square[2] = Button(window,image=player1_taken,width="100",
-                       height="100",command=None)
 
-    square[2].place(x=100,y=100)
-def create_buttons3():
-    square[4] = Button(window,image=player2_taken,width="100",
-                       height="100",command=None)
+    square[1] = Button(window,image=player1_taken,width="100",
+                       height="100",command=lambda: handle_button_click(1))
 
-    square[4].place(x=200,y=200)
+    square[1].place(x=100,y=100)
+
+    square[2] = Button(window,image=player2_taken,width="100",
+                       height="100",command=lambda: handle_button_click(2))
+
+    square[2].place(x=200,y=200)
+
+def square_taken():
+    messagebox.showinfo("Square Taken","Square already taken choose another!")
+
+def handle_button_click(button_number):
+    print("Button ",button_number, "was clicked")
+    square[button_number].configure(image=player1_taken,command=square_taken)
     
     
 window = Tk()
@@ -32,7 +39,6 @@ winner = PhotoImage(file="winner.png")
 
 square = [None]*9
 create_buttons()
-create_buttons2()
-create_buttons3()
+
 
 window.mainloop()
