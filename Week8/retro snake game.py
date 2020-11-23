@@ -1,6 +1,13 @@
 from tkinter import Tk,Canvas
 import random
 
+
+def placeFood():
+    global food,foodX,foodY
+    food = canvas.create_rectangle(0,0,snakeSize,snakeSize,fill="steel blue")
+    foodX = random.randint(0,width-snakeSize)
+    foodY = random.randint(0,height-snakeSize)
+    canvas.move(food,foodX,foodY)
 def leftKey(event):
     global direction
     direction = "left"
@@ -51,6 +58,8 @@ snake.append(canvas.create_rectangle(snakeSize,snakeSize,snakeSize*2,snakeSize*2
 score = 0
 txt = "Score: " + str(score)
 scoreText = canvas.create_text(width/2,10,fill="white",font="Times 20 italic bold",text=txt)
+
+placeFood()
 
 window.mainloop()
     
