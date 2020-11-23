@@ -34,6 +34,31 @@ def setWindowDimensions(w,h):
     window.geometry("%dx%d+%d+%d" % (w,h,x,y))
     return window
 
+def moveSnake():
+    canvas.pack()
+    positions = []
+    positions.append(canvas.coords(snake[0]))
+    if positions[0][0] < 0:
+        canvas.coords(snake[0],width,positions[0][1],width-snakeSize,positions[0][3])
+    elif positions[0][2] > width:
+        canvas.coords(snake[0],0-snakeSize,positions[0][1],0,positions[0][3])
+    elif positions[0][3] > height:
+        canvas.coords(snake[0],positions[0][0],0-snakeSize,positions[0][2],0)
+    elif positions[0][1] < 0:
+        canvas.coords(snake[0],positions[0][0],height,positions[0][2],height-snakeSize)
+
+    positions.clear()
+    positions.append(canvas.coords(snake[0]))
+    if direction == "left":
+        canvas.move(snake[0],-snakeSize,0)
+    elif direction == "right":
+        canvas.move(snake[0],snakeSize,0)
+    elif direction == "up":
+        canvas.move(snake[0],0,-snakeSize)
+    elif direction == "down":
+        canvas.move(snake[0],0,snakeSize)
+
+    window.after(90,moveSnake)
 
 width = 550
 height = 550
@@ -60,6 +85,7 @@ txt = "Score: " + str(score)
 scoreText = canvas.create_text(width/2,10,fill="white",font="Times 20 italic bold",text=txt)
 
 placeFood()
+moveSnake()
 
 window.mainloop()
     
