@@ -1,6 +1,22 @@
 from tkinter import Tk,Canvas
 import random
 
+def leftKey(event):
+    global direction
+    direction = "left"
+    
+def rightKey(event):
+    global direction
+    direction = "right"
+
+def upKey(event):
+    global direction
+    direction = "up"
+
+def downKey(event):
+    global direction
+    direction = "down"
+
 def setWindowDimensions(w,h):
     window = Tk()
     window.title("Snake Game")
@@ -19,9 +35,18 @@ height = 550
 window = setWindowDimensions(width,height)
 canvas = Canvas(window,bg="black",width=width,height=height)
 
+canvas.bind("<Left>", leftKey)
+canvas.bind("<Right>", rightKey)
+canvas.bind("<Up>", upKey)
+canvas.bind("<Down>", downKey)
+canvas.focus_set()
+
+direction  = "right"
+
 snake=[]
 snakeSize = 15
 snake.append(canvas.create_rectangle(snakeSize,snakeSize,snakeSize*2,snakeSize*2,fill="white"))
+
 
 score = 0
 txt = "Score: " + str(score)
