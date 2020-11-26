@@ -25,8 +25,12 @@ def square_taken():
 
 def handle_button_click(button_number):
     print("Button ", button_number,"was clicked")
-    square[button_number].configure(image=player1_taken,command=square_taken)
-    
+    global counter
+    if counter % 2 == 0:
+        square[button_number].configure(image=player1_taken,command=square_taken)
+    else:
+        square[button_number].configure(image=player2_taken,command=square_taken)
+    counter += 1
   
 window = Tk()
 window.title("OXO Game")
@@ -41,7 +45,7 @@ winner = PhotoImage(file="winner.png")
 
 square = [None]*9
 create_buttons()
-
+counter = 0
 
 
 
