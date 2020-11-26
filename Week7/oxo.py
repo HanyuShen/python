@@ -21,16 +21,37 @@ def create_buttons():
     square[8].place(x=200,y=200)
 
 def square_taken():
-    messagebox.showinfo("Square Taken","Square already taken chhose another!")
+    messagebox.showinfo("Square Taken","Square already taken choose another!")
 
 def handle_button_click(button_number):
     print("Button ", button_number,"was clicked")
     global counter
     if counter % 2 == 0:
         square[button_number].configure(image=player1_taken,command=square_taken)
+        update_move(button_number,1)
     else:
         square[button_number].configure(image=player2_taken,command=square_taken)
+        update_move(button_number,2)
     counter += 1
+
+def update_move(square_number,player_number):
+    square_to_oxo_map = [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2],[2,0],[2,1],[2,2]]
+    m = square_to_oxo_map
+    p = player_number
+    s = square_number
+    oxo [m[s][0]][m[s][1]] = p
+    check_win()
+
+def check_win():
+    won=[]
+    won.append(oxo[0][0] == oxo[1][1] == oxo[2][2] and oxo[0][0] != ' ')
+    won.append(oxo[0][2] == oxo[1][1] == oxo[2][0] and oxo[0][2] != ' ')
+    for i in range(3):
+        won.append(oxo[i][0] == oxo[i][1] == oxo[i][2] and oxo[i][0] != ' ')
+        won.append(oxo[0][i] == oxo[1][i] == oxo[2][i] and oxo[0][i] != ' ')
+    if True in won:
+        button =  Button(window,image=winner,width="300",height="100")
+        button.pack()
   
 window = Tk()
 window.title("OXO Game")
@@ -49,7 +70,11 @@ counter = 0
 
 
 
-
+oxo = [
+    [' ',' ',' '],
+    [' ',' ',' '],
+    [' ',' ',' ']
+]
 
 
 
