@@ -50,7 +50,7 @@ scoreText = canvas.create_text(width/2,10,fill="white",font="Times 20 italic bol
 
 def moveFood():
     global food,foodX,foodY
-    canvas.move(food,(food*(-1)),(foodY*(-1)))
+    canvas.move(food,(foodX*(-1)),(foodY*(-1)))
     foodX = random.randint(0,width-snakeSize)
     foodY = random.randint(0,height-snakeSize)
     canvas.move(food,foodX,foodY)
@@ -85,14 +85,35 @@ def moveSnake():
     foodPos = canvas.coords(food)
     if overlapping(sHeadPos,foodPos):
         moveFood()
-    window.after(90,moveSnake)
+        growSnake()
+    for i in range(1,len(snake)):
+        if overlapping(sHeadPos,canvas.coords(snake[i])):
+            gameOver = True
+            canvas.create_text(width/2,height/2,fill="white",font="Times 20 italic bold",text="Game Over!")
+    for i in range(1,len(snake)):
+        positions.append(canvas.coords(snake[i]))
+    for i in range(len(snake)-1):
+        canvas.coords(snake[i+1],positions[i][0],positions[i][1],positions[i][2],positions[i][3])
+    if "gameOver" not in locals():
+        window.after(90,moveSnake)
+
 
 def growSnake():
-    lastElement = len(snake) - 1
+    lastElement = len(snake)-1
     lastElementPos = canvas.coords(snake[lastElement])
     snake.append(canvas.create_rectangle(0,0,snakeSize,snakeSize,fill="#FDF3F3"))
     if (direction == "left"):
         canvas.coords(snake[lastElement+1],lastElementPos[0]+snakeSize,lastElementPos[1],lastElementPos[2]+snakeSize,lastElementPos[3])
+    elif(direction == "right"):
+        canvas.coords(snake[lastElement+1],lastElementPos[0] - snakeSize,lastElementPos[1],lastElementPos[2] - snakeSize,lastElementPos[3])
+    elif(direction == "up"):
+        canvas.coords(snake[lastElement+1],lastElementPos[0],lastElementPos[1]+snakeSize,lastElementPos[2],lastElementPos[3]+snakeSize)
+    else:
+        canvas.coords(snake[lastElement+1],lastElementPos[0],lastElementPos[1]-snakeSize,lastElementPos[2],lastElementPos[3]-snakeSize)
+    global score
+    score += 10
+    txt = "score: " + str(score)
+    canvas.itemconfigure(scoreText,text=txt)
         
 
 def leftKey(event):
@@ -122,7 +143,8 @@ direction = "right"
 
 placeFood()
 
-moveSnake() 
+moveSnake()
+
 window.mainloop()
 
 
